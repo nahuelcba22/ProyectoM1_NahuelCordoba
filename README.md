@@ -24,4 +24,4 @@ Aplicación web interactiva que permite generar paletas de colores aleatorias.
 
 # 🌐 Demo
 
-[LINK_GITHUB_PAGES]
+https://nahuelcba22.github.io/ProyectoM1_NahuelCordoba/
