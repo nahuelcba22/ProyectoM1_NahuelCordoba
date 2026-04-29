@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Colorfly Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <img src="assets/logo.png" alt="Logo de Colorfly" class="logo">
+    <p class="subtitle">Generador de paletas</p>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+
+    <!-- CONTROLES -->
+    <section aria-label="Controles de generación">
+
+      <label for="cantidad">Cantidad de colores:</label>
+
+      <div class="cantidad-container">
+
+
+  <div class="cantidad-botones">
+    <button class="btn-cantidad active" data-value="6">6</button>
+    <button class="btn-cantidad" data-value="8">8</button>
+    <button class="btn-cantidad" data-value="9">9</button>
+  </div>
+</div>
+
+      <br>
+
+      <button id="btnGenerar">
+        Generar paleta
+      </button>
+
+    </section>
+
+    <!-- PALETA -->
+    <section id="paleta" aria-live="polite"></section>
+
+    <!-- TOAST -->
+    <div id="toast" role="status" aria-live="polite"></div>
+
+  </main>
+
+  <script src="js/script.js"></script>
+  <div class="formato-container">
+  <p>Formato de color:</p>
+
+  <div class="formato-botones">
+    <button class="btn-formato active" data-format="hex">HEX</button>
+    <button class="btn-formato" data-format="hsl">HSL</button>
+  </div>
+</div>
+
+</body>
+</html>
