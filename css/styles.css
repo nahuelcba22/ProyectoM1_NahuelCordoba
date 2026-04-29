@@ -1,17 +1,49 @@
 body {
   font-family: Arial, sans-serif;
-  background: #111;
+  background: linear-gradient(135deg, #0B0F14, #111827);
   color: white;
   text-align: center;
   padding: 20px;
 }
 
+
 button {
-  padding: 10px 15px;
-  margin: 10px;
+  padding: 12px 20px;
+  margin: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  background: #19BFB7;
+  color: black;
+}
+
+
+button:focus {
+  outline: 3px solid yellow;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 260px;
+  max-width: 80%;
+  height: auto;
+  transition: 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #9CA3AF;
 }
 
 #paleta {
@@ -22,7 +54,24 @@ button {
 }
 
 .color {
-  width: 100px;
-  height: 100px;
-  background: gray;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+.color:hover {
+  transform: scale(1.05);
+}
+
+.color span {
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  padding: 5px;
+  font-size: 14px;
 }
