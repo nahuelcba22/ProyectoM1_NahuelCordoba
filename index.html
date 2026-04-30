@@ -16,48 +16,48 @@
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main>
+ <main>
 
-    <!-- CONTROLES -->
-    <section aria-label="Controles de generación">
+  <!-- CONTROLES -->
+  <section aria-label="Controles de generación">
 
-      <label for="cantidad">Cantidad de colores:</label>
+    <label for="cantidad">Cantidad de colores:</label>
 
-      <div class="cantidad-container">
+    <div class="cantidad-container">
+      <div class="cantidad-botones">
+        <button class="btn-cantidad active" data-value="6">6</button>
+        <button class="btn-cantidad" data-value="8">8</button>
+        <button class="btn-cantidad" data-value="9">9</button>
+      </div>
+    </div>
 
+    <br>
 
-  <div class="cantidad-botones">
-    <button class="btn-cantidad active" data-value="6">6</button>
-    <button class="btn-cantidad" data-value="8">8</button>
-    <button class="btn-cantidad" data-value="9">9</button>
-  </div>
-</div>
+    <button id="btnGenerar">
+      Generar paleta
+    </button>
 
-      <br>
+  </section>
 
-      <button id="btnGenerar">
-        Generar paleta
-      </button>
-
-    </section>
-
-    <!-- PALETA -->
-    <section id="paleta" aria-live="polite"></section>
-
-    <!-- TOAST -->
-    <div id="toast" role="status" aria-live="polite"></div>
-
-  </main>
-
-  <script src="js/script.js"></script>
+  <!-- FORMATO -->
   <div class="formato-container">
-  <p>Formato de color:</p>
+    <p>Formato de color:</p>
 
-  <div class="formato-botones">
-    <button class="btn-formato active" data-format="hex">HEX</button>
-    <button class="btn-formato" data-format="hsl">HSL</button>
+    <div class="formato-botones">
+      <button class="btn-formato active" data-format="hex">HEX</button>
+      <button class="btn-formato" data-format="hsl">HSL</button>
+    </div>
   </div>
-</div>
+
+  <!-- PALETA -->
+  <section id="paleta" aria-live="polite"></section>
+
+  <!-- TOAST -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+</main>
+
+<script src="js/script.js"></script>
 
 </body>
 </html>

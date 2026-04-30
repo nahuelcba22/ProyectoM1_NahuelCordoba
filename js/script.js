@@ -1,14 +1,16 @@
+// -------------------- SELECTORES --------------------
 const btn = document.getElementById("btnGenerar");
 const contenedor = document.getElementById("paleta");
-const select = document.getElementById("cantidad");
 const toast = document.getElementById("toast");
+const botonesCantidad = document.querySelectorAll(".btn-cantidad");
+const botonesFormato = document.querySelectorAll(".btn-formato");
+
+// -------------------- ESTADO --------------------
 let cantidadSeleccionada = 6;
 let formatoActual = "hex";
+let paleta = [];
 
-let colores = [];
-let bloqueados = [];
-
-// Generar color HEX
+// -------------------- GENERACIÓN DE COLOR --------------------
 function generarColor() {
   if (formatoActual === "hex") {
     const chars = "0123456789ABCDEF";
@@ -21,7 +23,6 @@ function generarColor() {
     return color;
   }
 
-  // HSL
   const h = Math.floor(Math.random() * 360);
   const s = Math.floor(Math.random() * 100);
   const l = Math.floor(Math.random() * 100);
@@ -29,7 +30,59 @@ function generarColor() {
   return `hsl(${h}, ${s}%, ${l}%)`;
 }
 
-// Mostrar toast
+/* -------------------- CONVERSIÓN HSL → HEX -------------------- */
+function hslToHex(h, s, l) {
+  s /= 100;
+  l /= 100;
+
+  const k = n => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+
+  const f = n => {
+    const color = l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+    return Math.round(255 * color).toString(16).padStart(2, "0");
+  };
+
+  return `#${f(0)}${f(8)}${f(4)}`.toUpperCase();
+}
+
+// -------------------- INICIALIZACIÓN --------------------
+function inicializarPaleta(cantidad) {
+  paleta = [];
+
+  for (let i = 0; i < cantidad; i++) {
+    paleta.push({
+      color: generarColor(),
+      locked: false
+    });
+  }
+}
+
+// -------------------- AJUSTE DE CANTIDAD --------------------
+function ajustarPaleta(nuevaCantidad) {
+  const bloqueados = paleta.filter(item => item.locked);
+
+  paleta = paleta.slice(0, nuevaCantidad);
+
+  bloqueados.forEach(item => {
+    if (!paleta.includes(item)) {
+      if (paleta.length < nuevaCantidad) {
+        paleta.push(item);
+      } else {
+        paleta[nuevaCantidad - 1] = item;
+      }
+    }
+  });
+
+  while (paleta.length < nuevaCantidad) {
+    paleta.push({
+      color: generarColor(),
+      locked: false
+    });
+  }
+}
+
+// -------------------- TOAST --------------------
 function mostrarToast(mensaje) {
   toast.textContent = mensaje;
   toast.classList.add("show");
@@ -39,100 +92,104 @@ function mostrarToast(mensaje) {
   }, 1500);
 }
 
-// Crear bloque de color
-function crearColor(color, index) {
+// -------------------- CREAR BLOQUE --------------------
+function crearColor(item) {
   const div = document.createElement("div");
   div.classList.add("color");
-  div.style.backgroundColor = color;
+  div.style.backgroundColor = item.color;
 
   const span = document.createElement("span");
-  span.textContent = color;
+ let textoMostrado = item.color;
 
-  if (bloqueados[index]) {
-    div.classList.add("locked");
-  }
+if (item.color.startsWith("hsl")) {
+  const valores = item.color.match(/\d+/g);
+  const h = parseInt(valores[0]);
+  const s = parseInt(valores[1]);
+  const l = parseInt(valores[2]);
 
-  // CONTROLES
-  const controls = document.createElement("div");
-  controls.classList.add("controls", "tooltip");
+  textoMostrado = hslToHex(h, s, l);
+}
+
+span.textContent = textoMostrado.toUpperCase();
+
+  if (item.locked) div.classList.add("locked");
+
+  const tooltip = document.createElement("div");
+  tooltip.classList.add("tooltip");
 
   const lockBtn = document.createElement("button");
-  lockBtn.textContent = bloqueados[index] 
-    ? "Desbloquear" 
-    : "Bloquear color";
+  lockBtn.textContent = item.locked ? "Desbloquear" : "Bloquear color";
 
-  controls.append(lockBtn);
-
-  div.appendChild(controls);
+  tooltip.append(lockBtn);
+  div.appendChild(tooltip);
   div.appendChild(span);
 
-  // Mostrar con delay
+  // Tooltip hover
   let timeout;
   div.addEventListener("mouseenter", () => {
-    timeout = setTimeout(() => {
-      controls.classList.add("show");
-    }, 400);
+    timeout = setTimeout(() => tooltip.classList.add("show"), 400);
   });
 
   div.addEventListener("mouseleave", () => {
     clearTimeout(timeout);
-    controls.classList.remove("show");
+    tooltip.classList.remove("show");
   });
 
-  // BLOQUEAR
+  // Bloquear
   lockBtn.addEventListener("click", (e) => {
     e.stopPropagation();
+    item.locked = !item.locked;
 
-    bloqueados[index] = !bloqueados[index];
-
-    if (bloqueados[index]) {
-      div.classList.add("locked");
-      lockBtn.textContent = "Desbloquear";
-    } else {
-      div.classList.remove("locked");
-      lockBtn.textContent = "Bloquear color";
-    }
+    div.classList.toggle("locked");
+    lockBtn.textContent = item.locked ? "Desbloquear" : "Bloquear color";
   });
 
-  // COPIAR
+  // Copiar
   div.addEventListener("click", () => {
-    navigator.clipboard.writeText(color);
-    mostrarToast("Copiado: " + color);
+    navigator.clipboard.writeText(textoMostrado.toUpperCase());
+    mostrarToast("Copiado: " + textoMostrado);
   });
 
   return div;
 }
 
-// Generar paleta
+/* -------------------- GENERAR PALETA -------------------- */
 function generarPaleta() {
+  // Solo cambia colores (lógica)
+  paleta.forEach(item => {
+    if (!item.locked) {
+      item.color = generarColor();
+    }
+  });
+  renderPaleta();
+}
+/* -------------------- RENDER PALETA -------------------- */
+function renderPaleta() {
   contenedor.innerHTML = "";
 
-  const cantidad = cantidadSeleccionada;
-
-  for (let i = 0; i < cantidad; i++) {
-    if (!bloqueados[i]) {
-      colores[i] = generarColor();
-    }
-
-    const bloque = crearColor(colores[i], i);
+  paleta.forEach(item => {
+    const bloque = crearColor(item);
     contenedor.appendChild(bloque);
-  }
+  });
 }
 
-// Evento botón
+
+// -------------------- EVENTOS --------------------
 btn.addEventListener("click", generarPaleta);
-const botonesCantidad = document.querySelectorAll(".btn-cantidad");
 
 botonesCantidad.forEach(btn => {
   btn.addEventListener("click", () => {
     botonesCantidad.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
-    cantidadSeleccionada = parseInt(btn.dataset.value);
+    const nuevaCantidad = parseInt(btn.dataset.value);
+
+    ajustarPaleta(nuevaCantidad);
+    cantidadSeleccionada = nuevaCantidad;
+
     generarPaleta();
   });
 });
-const botonesFormato = document.querySelectorAll(".btn-formato");
 
 botonesFormato.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -140,9 +197,11 @@ botonesFormato.forEach(btn => {
     btn.classList.add("active");
 
     formatoActual = btn.dataset.format;
-    generarPaleta();
+    renderPaleta();
   });
 });
 
-// Inicial
+
+// -------------------- INICIO --------------------
+inicializarPaleta(cantidadSeleccionada);
 generarPaleta();
