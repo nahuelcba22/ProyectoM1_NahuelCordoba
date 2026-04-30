@@ -4,36 +4,57 @@ Aplicación web interactiva que permite generar paletas de colores aleatorias, c
 
 # Funcionalidades
 Generación de paletas de colores aleatorios
+
 Selección de cantidad de colores (6, 8 o 9)
+
 Bloqueo de colores para mantenerlos entre generaciones
+
 Copia de color al hacer click
+
 Conversión automática a formato HEX para visualización
+
 Selección de formato de generación (HEX / HSL)
+
 Feedback visual mediante tooltip y notificación (toast)
+
 Interfaz simple e interactiva
 # Decisiones técnicas
-Uso de HTML semántico para estructurar la aplicación
-Estilos con CSS (layout, grid y microinteracciones)
-JavaScript puro (sin frameworks)
+Uso de HTML semántico
+
+Estilos con CSS
+
+JavaScript
 Manejo del estado mediante un array de objetos:
 { color, locked }
 # Separación de responsabilidades:
-generación de datos
-renderizado en DOM
-Conversión de HSL a HEX para cumplir con la consigna
+Generación de datos
+
+Renderizado en DOM
+
+Conversión de HSL a HEX
+
 Uso de eventos para interacción del usuario
 # Estructura del proyecto
 /index.html → estructura de la aplicación
+
 /css/styles.css → estilos visuales
+
 /js/script.js → lógica y comportamiento
 # Uso
 Seleccionar la cantidad de colores
+
 Hacer click en "Generar paleta"
+
 Bloquear colores si se desea mantenerlos
+
 Hacer click sobre un color para copiarlo
+
 Cambiar el formato de generación si se desea
+
 Ejecución local
+
 Clonar repositorio o descargar ZIP
+
 Abrir el archivo index.html
 # Demo
 
@@ -41,9 +62,15 @@ https://nahuelcba22.github.io/ProyectoM1_NahuelCordoba/
 
 # Posibles mejoras
 Conversión en tiempo real entre formatos (sin regenerar colores)
+
 Guardado de paletas (localStorage)
+
 Exportación de paletas (imagen o archivo)
+
 Historial de colores generados
+
 Mejora de accesibilidad
+
 Optimización para dispositivos móviles
+
 Animaciones más avanzadas
