@@ -53,9 +53,16 @@ Cambiar el formato de generación si se desea
 
 Ejecución local
 
-Clonar repositorio o descargar ZIP
+# Despliegue en GitHub Pages
+Subir el repositorio a GitHub
+Ir a Settings del repositorio
+Entrar en la sección "Pages"
+Seleccionar la rama main
+Guardar cambios
 
-Abrir el archivo index.html
+Luego de unos segundos, la aplicación estará disponible en:
+
+https://nahuelcba22.github.io/ProyectoM1_NahuelCordoba/
 # Demo
 
 https://nahuelcba22.github.io/ProyectoM1_NahuelCordoba/
