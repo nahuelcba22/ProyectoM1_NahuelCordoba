@@ -1,0 +1,190 @@
+# Documentación del proyecto: Colorfly
+Consideraciones sobre la estructura del repositorio
+
+Durante el desarrollo del proyecto, surgieron algunas dificultades relacionadas con la organización solicitada en la consigna.
+
+En primer lugar, el archivo README no se encuentra dentro de la carpeta de Documentación. Esto se debe a que no logré configurar correctamente GitHub para que lo reconociera y lo mostrara adecuadamente desde una subcarpeta o rama específica. En las pruebas realizadas, GitHub solo detectaba correctamente el README cuando estaba ubicado en la carpeta raíz del repositorio, por lo que opté por mantenerlo allí para asegurar su correcta visualización.
+
+En segundo lugar, el código fuente no se encuentra dentro de una carpeta llamada “Desarrollo”, como indicaba la consigna. Esto se debe a que al intentar mover los archivos fuera de la carpeta principal, la aplicación dejaba de funcionar correctamente en GitHub Pages. La plataforma requiere que el archivo index.html se encuentre en la raíz o en una carpeta específica configurada, lo cual no logré implementar correctamente dentro del tiempo del proyecto.
+
+Debido a estas limitaciones técnicas, prioricé que la aplicación funcione correctamente y esté desplegada, aunque la estructura no coincida exactamente con la solicitada.
+
+# Las fases tempranas del desarrollo no las pude "commitear" por un error mio de comprensión del uso de los commits.
+
+
+
+ # Inicio del desarrollo
+
+Antes de comenzar a programar, realicé una planificación general de cómo quería que se viera la aplicación.
+
+Mi idea inicial fue diseñar una interfaz simple, clara y fácil de usar. Visualicé una página con un logo centrado en la parte superior y una estructura minimalista, con pocos botones pero bien definidos, para que el usuario pudiera entender rápidamente cómo interactuar con la aplicación.
+
+El objetivo fue evitar una interfaz recargada y priorizar la claridad visual. Por eso decidí:
+
+Ubicar el logo en una posición central
+Mantener una paleta de colores oscura para resaltar los colores generados
+Utilizar botones simples y visibles
+Reducir la cantidad de elementos en pantalla
+
+# Primeros pasos en el desarrollo
+
+El desarrollo comenzó con la creación de la estructura HTML básica, utilizando etiquetas semánticas como header, main y section, para organizar correctamente el contenido.
+
+Luego, trabajé en los estilos con CSS, enfocándome en:
+
+Centrar los elementos principales
+Definir el layout de la paleta de colores
+Aplicar estilos consistentes a botones e interfaz
+
+Una vez definida la parte visual, avancé con la lógica en JavaScript, comenzando por la funcionalidad principal:
+
+Generar colores aleatorios
+Renderizarlos dinámicamente en el DOM
+
+A partir de ahí, fui agregando funcionalidades progresivamente, priorizando siempre que la aplicación funcionara correctamente antes de incorporar mejoras adicionales.
+
+
+# Problemas durante el desarrollo
+
+# Etapa HTML
+
+La etapa de HTML no presentó grandes dificultades. Desde el inicio tenía bastante clara la estructura e intencionalidad de la página, ya que había definido previamente que buscaba un diseño simple, intuitivo y fácil de usar.
+
+Esto permitió que la maquetación inicial fuera relativamente rápida. A lo largo del proceso sí fue necesario realizar algunos ajustes, como agregar o modificar elementos, pero en general no fue una etapa compleja ni demandante.
+
+# Etapa CSS
+
+Las principales dificultades comenzaron en la etapa de estilos. Si bien tenía una idea clara de cómo quería que se vea la aplicación, trasladar esa idea al código no fue inmediato.
+
+Durante esta fase surgieron varias dudas iniciales:
+
+Dónde ubicar los botones dentro de la interfaz
+Qué colores utilizar
+Cómo mostrar visualmente la paleta de colores
+Qué tamaño debían tener los elementos
+Qué componentes debían tener mayor prioridad visual
+Si la distribución de la paleta debía cambiar según la cantidad de colores
+
+Estas decisiones no estaban definidas desde el principio y se fueron resolviendo de forma progresiva, mediante prueba y error.
+
+A medida que avanzaba, fue necesario rehacer partes del diseño, reorganizar elementos y replantear decisiones visuales para lograr un resultado más claro y funcional.
+
+# Problema: elección de colores (colometría)
+
+Uno de los principales desafíos en esta etapa fue la elección de colores para la interfaz.
+
+No contar con conocimientos previos sobre teoría del color dificultó definir una paleta visual coherente para la aplicación. Esto generó varios intentos fallidos hasta encontrar una combinación que no interfiera con los colores generados por la propia aplicación.
+
+Finalmente, se optó por un diseño con fondo oscuro y elementos simples, permitiendo que los colores generados sean el foco principal.
+
+# Problema: implementación del logo
+
+Otro punto que presentó dificultades fue la incorporación del logo.
+
+El logo era un elemento central dentro del diseño, pero su integración no fue inmediata. Surgieron problemas relacionados con:
+
+El tamaño de la imagen
+Los espacios vacíos dentro del archivo
+La separación visual con otros elementos (como el texto del encabezado)
+
+Esto obligó a realizar ajustes tanto en el CSS como en el propio archivo de imagen, hasta lograr una mejor alineación y coherencia visual dentro de la interfaz.
+
+
+# Desarrollo en JavaScript
+
+La etapa de JavaScript fue la más compleja del proyecto, ya que implicó trabajar con lógica, eventos y manipulación dinámica del DOM.
+
+A diferencia de HTML y CSS, donde el resultado es más inmediato, en JavaScript surgieron varios problemas relacionados con el comportamiento de la aplicación, lo que requirió múltiples pruebas, errores y correcciones.
+
+# Manejo del estado
+
+Uno de los principales desafíos fue entender cómo mantener el estado de la paleta.
+
+En un principio, intenté manejar los colores y los bloqueos utilizando arrays separados. Sin embargo, esto generaba problemas, ya que los datos se desincronizaban al cambiar la cantidad de colores o regenerar la paleta.
+
+La solución fue unificar todo en un solo array de objetos, donde cada elemento contiene:
+
+el color
+su estado de bloqueo
+
+Esto permitió mantener la información de forma más ordenada y evitar errores.
+
+# Manipulación del DOM
+
+Otro aspecto importante fue la generación dinámica de elementos en el DOM.
+
+Cada color de la paleta se crea mediante JavaScript y se inserta en el contenedor correspondiente. Esto permitió que la cantidad de colores cambie en tiempo real según la selección del usuario.
+
+# Separación de lógica y render
+
+Uno de los problemas que surgieron fue que ciertas acciones, como cambiar el formato de color, generaban una nueva paleta, lo cual no era el comportamiento esperado.
+
+Para solucionarlo, se separó la lógica en dos funciones:
+
+una encargada de generar los datos
+otra encargada de renderizar la interfaz
+
+Esto permitió tener mayor control sobre cuándo se generan nuevos colores y cuándo solo se actualiza la visualización.
+
+# Manejo de eventos
+
+Se implementaron distintos eventos para permitir la interacción del usuario:
+
+generación de paleta mediante un botón
+selección de cantidad de colores
+cambio de formato
+bloqueo de colores
+copia de colores al hacer click
+
+Esto permitió que la aplicación responda de forma dinámica a las acciones del usuario.
+
+# Problemas y errores
+
+Durante esta etapa también surgieron errores que afectaban el funcionamiento de la aplicación.
+
+Uno de ellos fue un error de sintaxis en JavaScript (llaves mal cerradas), que impedía que el código se ejecutara correctamente.
+
+También hubo problemas relacionados con la lógica, como la regeneración innecesaria de colores o la pérdida de estados al modificar la paleta.
+
+Estos errores fueron detectados utilizando las herramientas de desarrollo del navegador y corregidos progresivamente.
+
+# Conversión de formatos
+
+La consigna requería generar colores en distintos formatos, pero mostrarlos en HEX.
+
+Para cumplir con esto, se implementó una función que convierte valores HSL a HEX, permitiendo mantener la lógica de generación sin afectar la visualización.
+# Mejoras descartadas
+
+Durante el desarrollo del proyecto también surgieron ideas de funcionalidades adicionales que finalmente no fueron implementadas. En todos los casos, se decidió priorizar el cumplimiento de la consigna y la estabilidad de la aplicación.
+
+# Generación de gradientes
+
+En una etapa inicial, se consideró agregar dos botones adicionales: “Gradiente ascendente” y “Gradiente descendente”.
+
+La idea era generar una nueva paleta basada en un color seleccionado, creando una transición progresiva entre tonos relacionados.
+
+Sin embargo, esta funcionalidad presentaba una complejidad mayor a la esperada, especialmente en el manejo de los colores dentro de arrays y en su correcta distribución y orden dentro de la interfaz.
+
+Dado que no era un requisito obligatorio ni un extra crítico, se decidió descartar su implementación para no afectar el avance del proyecto.
+
+De todas formas, se considera una mejora interesante para futuras versiones.
+
+# Interacción mediante arrastre (drag & drop)
+
+Otra idea fue permitir al usuario arrastrar los colores para reorganizarlos visualmente o compararlos entre sí.
+
+Esta funcionalidad no llegó a implementarse, ya que implicaba trabajar con eventos más avanzados y una lógica adicional que no estaba clara en ese momento.
+
+Se reconoce como una posible mejora a explorar a futuro.
+
+# Selector de color avanzado
+
+También se evaluó incorporar un menú interactivo (mediante hover) que permitiera modificar el color utilizando un círculo cromático.
+
+Esta idea fue descartada debido a su complejidad y a que excedía los requerimientos de la consigna.
+
+Se priorizó mantener una interfaz simple, clara y funcional.
+
+# Nota personal
+
+Aunque estas funcionalidades no fueron implementadas en esta versión, forman parte de ideas a futuro para seguir mejorando la aplicación y profundizando en el aprendizaje.
